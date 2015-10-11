@@ -1,0 +1,28 @@
+body{
+	background-color:#FFFFCC;	
+}
+#border{
+	border: 2px ridge purple;
+	background-color: #494949;
+	text-align:center;
+}
+.center{
+	text-align:center;
+}
+.doctrinTable{
+	text-align:center;
+	font-size:16px;
+	background-color:white;
+	cursor:crosshair;
+
+}
+#table{
+	margin: 0 auto;
+}
+#timer{
+	border: 2px ridge purple;
+	background-color: #492729;
+}
+#timerField{
+	text-align:center;
+}

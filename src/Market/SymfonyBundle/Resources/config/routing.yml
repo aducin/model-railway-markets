@@ -1,0 +1,7 @@
+market_symfony_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: MarketSymfonyBundle:Default:index }
+    
+markets_index:
+    path:     /markets/{path}
+    defaults: { _controller: MarketSymfonyBundle:Markets:index }
