@@ -2,27 +2,14 @@
 
 <div id="header">
 	<div class="background">
-		<h1 id="logo"> <a href="index.html">Rent a Helicopter</a> </h1>
-		<div id="navigation">
+		<h1 id="logo"> <a href="{{ app.request.getBaseURL() }}">Add the main text here</a> </h1>
+		<div id="navigation">	
 			<ul>
-				<li {% if path == 'index' %}class="selected"{% endif %}>
-					<a href="index">Homepage</a>
-				</li>
-				<li {% if path == 'services' %}class="selected"{% endif %}>
-					<a href="services">Services</a>
-				</li>
-				<li {% if path == 'rates' %}class="selected"{% endif %}>
-					<a href="rates">Rates</a>
-				</li>
-				<li {% if path == 'about' %}class="selected"{% endif %}>
-					<a href="about">About</a>
-				</li>
-				<li {% if path == 'blog' %}class="selected"{% endif %}>
-					<a href="blog">Blog</a>
-				</li>
-				<li {% if path == 'contact' %}class="selected"{% endif %}>
-					<a href="contact">Contact</a>
-				</li class="selected">
+				{% for paths in url %}
+					<li {% if path == paths.name %}class="selected"{% endif %}>
+						<a href="{{ paths.path }}">{{ paths.name }}</a>
+					</li>
+				{% endfor %}
 			</ul>
 		</div>
 	</div>

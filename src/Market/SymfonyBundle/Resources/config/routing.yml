@@ -1,7 +1,11 @@
 market_symfony_homepage:
     path:     /hello/{name}
     defaults: { _controller: MarketSymfonyBundle:Default:index }
-    
+
 markets_index:
-    path:     /markets/{path}
+    path:     /{path}
     defaults: { _controller: MarketSymfonyBundle:Markets:index }
+
+markets:
+    resource: "@MarketSymfonyBundle/Controller/MarketsController.php"
+    type:     annotation
