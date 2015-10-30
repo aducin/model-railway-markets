@@ -5,7 +5,26 @@
         <title>{% block title %}Welcome by Zapp!{% endblock %}</title>
         {% block stylesheets %}
              <link href="/public/css/style.css" type="text/css" rel="stylesheet" />
-         {% endblock %}
+        {% endblock %}
+        {% block javascripts %}
+            <script src="/public/js/main.js" type="text/javascript"></script>
+        {% endblock %}
+        <script>
+function setAlert(){
+    if(document.send.nameText.value=="" && document.send.emailText.value=="" && document.send.messageText.value==""){
+        alert("Nie wypełniono żadnego pola!");
+    }
+    else if(document.send.nameText.value==""){
+        alert("Nie wypełniono pola \"Imię/Nazwisko\"!");
+    }
+    else if(document.send.emailText.value==""){
+        alert("Nie wpisano pola \"Adres e-mail\"!");
+    }
+    else if(document.send.messageText.value==""){
+        alert("Nie wpisano pola \"Wiadomość\"!");
+    }
+}
+</script>
     </head>
     <body>
 
@@ -34,9 +53,6 @@
             {% endblock %}
 
         {% endblock %}
-        
-        {% block javascripts %}
-             <script src="/public/js/main.js" type="text/javascript"></script>
-         {% endblock %}
+    
     </body>
 </html>
