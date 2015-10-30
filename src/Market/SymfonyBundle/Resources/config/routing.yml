@@ -2,10 +2,50 @@ market_symfony_homepage:
     path:     /hello/{name}
     defaults: { _controller: MarketSymfonyBundle:Default:index }
 
-markets_index:
-    path:     /{path}
-    defaults: { _controller: MarketSymfonyBundle:Markets:index }
+name_new:
+    path:     /form
+    defaults: { _controller: MarketSymfonyBundle:Default:new }
 
-markets:
-    resource: "@MarketSymfonyBundle/Controller/MarketsController.php"
-    type:     annotation
+showMarketDetails:
+    path:     /terminarz/{seekedMarket}
+    defaults: { _controller: MarketSymfonyBundle:Markets:showMarket }
+
+addMarket:
+    path:     /add/market
+    defaults: { _controller: MarketSymfonyBundle:DataBase:add }
+
+updateMarket:
+    path:     /update/{id}/{bookmark_id}
+    defaults: { _controller: MarketSymfonyBundle:DataBase:update }
+
+getMarket:
+    path:     /get/allMarkets
+    defaults: { _controller: MarketSymfonyBundle:DataBase:getAll }
+
+createBookmark:
+    path:     /createBookmark/{name}
+    defaults: { _controller: MarketSymfonyBundle:DataBase:add }
+
+addDate:
+    path:     /addDate/{market}
+    defaults: { _controller: MarketSymfonyBundle:DataBase:addDate }
+
+addAllDates:
+    path:     /get/allDates
+    defaults: { _controller: MarketSymfonyBundle:DataBase:getAllDates }
+
+getOneDate:
+    path:     /getOneDate/{date}/{market}
+    defaults: { _controller: MarketSymfonyBundle:DataBase:getOneDate }
+
+getDate:
+    path:     /getDate/{date}
+    defaults: { _controller: MarketSymfonyBundle:DataBase:getDate }
+
+getMarkets:
+    path:     /getMarket/{seekedBookmark}
+    defaults: { _controller: MarketSymfonyBundle:DataBase:getMarkets }
+
+getDates:
+    path:     /getMarketDate/{market}
+    defaults: { _controller: MarketSymfonyBundle:DataBase:getDates }
