@@ -2,28 +2,78 @@
 
 namespace Market\SymfonyBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Validator\Constraints\Date;
+use Market\SymfonyBundle\Entity\Bookmark;
+use Market\SymfonyBundle\Entity\Dates;
+use Market\SymfonyBundle\Entity\DatesRepository;
+use Market\SymfonyBundle\Entity\Markets;
+use Market\SymfonyBundle\Entity\MarketsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 class MarketsController extends Controller
 {
-	public function getBookmarks(){
-		$url=array('homepage', 'services', 'rates' , 'about', 'blog', 'contact');
-		foreach($url as $page) {
-			$allURLsGen[] = array('name'=>$page, 'path'=>$this->generateUrl('markets_index', array('path' => $page)));
-    		}
-		return $allURLsGen;
-	}
-	/**
- 	* @Route("/", defaults={"path" = "homepage"})
- 	* @Route("/{path}")
- 	*/
-	public function indexAction($path)
+	public function showMarketAction($seekedMarket)
 	{
-		return $this->render('MarketSymfonyBundle:Markets:'.$path.'.html.twig', array(
-			'path' => $path, 'url'=>$this->getBookmarks()
-			));
+		$mailResult=null;
+		if(isset($_POST['nameText']) AND (isset($_POST['emailText']) AND (isset($_POST['messageText']))))
+			if($_POST['nameText']!=null AND $_POST['emailText']!=null){
+			{
+				$notification = new MailController();
+				$mailResult=$notification->mailSend($_POST['emailText'], $_POST['messageText'], $_POST['nameText']);
+				//var_dump($_POST['nameText']);	var_dump($_POST['emailText']);	var_dump($_POST['messageText']);exit();
+			}
+		}
+		$em = $this->getDoctrine()->getManager();
+		$bookmarks = $em->getRepository('MarketSymfonyBundle:Bookmark')->findAll();
+			$finalBookmarkName[]=array('path'=>'homepage');
+			foreach($bookmarks as $bookmark)
+			{
+				$finalBookmarkName[]=array('path'=>$bookmark->getBookmarkName());
+			}
+			$finalBookmarkName[]=array('path'=>'e-market');
+
+		if($seekedMarket=='homepage' OR $seekedMarket=='e-market'){
+			return $this->render('MarketSymfonyBundle:Markets:'.$seekedMarket.'.html.twig', array('notification'=> $mailResult, 'path'=>$seekedMarket, 'url'=>$finalBookmarkName));
+		}else{
+			$schedule = array();
+			$singleBookmark = $em->getRepository('MarketSymfonyBundle:Bookmark')->findOneByBookmarkName($seekedMarket);
+			$singleBookmarkId=$singleBookmark->getId();
+			$singleBookmark=$singleBookmark->getBookmarkName();
+
+			$markets = $em->getRepository('MarketSymfonyBundle:Markets')->findAllDatesSelectedMarket($singleBookmarkId);
+
+			foreach($markets as $market)
+			{
+				$dates = $em->getRepository('MarketSymfonyBundle:Dates')->findAllDatesCurrentDate($market, 1);
+				$nextDate = $em->getRepository('MarketSymfonyBundle:Dates')->findFirstMarketDate($market);
+				if($nextDate!='noResult'){
+					$nextDateFormat=date_format($nextDate[0]->getMarketDate(), 'Y-m-d');
+				}else{
+					$nextDateFormat='Obecnie brak kolejnego terminu.';
+				}
+				$count=0;
+				foreach($dates as $date)
+				{
+					$schedule[]=date_format($date->getMarketDate(), 'Y-m-d');
+					$count++;
+				}
+				$finalIfnormation[]=array('name'=>$market->getMarketCity(), 'address'=>$market->getAddress(), 'contact'=>$market->getContact(), 
+					'hours'=>$market->getHours(), 'nextDate'=>$nextDateFormat, 'schedule'=>$schedule, 'count'=>$count
+					);
+				$schedule=null;
+			}
+			return $this->render('MarketSymfonyBundle:Markets:markets.html.twig', array('market'=>$finalIfnormation,
+				'notification'=> $mailResult, 'path'=>$singleBookmark, 'url'=>$finalBookmarkName));
+		}
 	}
 }
+
+/*database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     symfony
+    database_user:     root
+    database_password: ~
+    */

@@ -1,0 +1,59 @@
+{% extends 'MarketSymfonyBundle:Markets:bases.html.twig' %}
+
+{% block title %}
+{{ path }} - terminarz
+{% endblock %}
+
+{% block body -%}
+
+<div id="page">
+
+	{{ include('MarketSymfonyBundle:Markets:table.html.twig') }}
+
+		<div id="contents">
+			<div id="rates">
+				<p style="text-align: justify;">
+					Poniżej prezentujemy Państwu terminarz giełd modelarstwa kolejowego w Europie Środkowej. Ze względu na ilość giełd w Niemczech, zamieszczone zostały jedynie wybrane pozycje. Szerszą informację można uzyskać na niemieckojęzycznej stronie <a href="http://eisenbahntermine.de/"" target="blank" title="Serwis Przejdź do serwisu Eisenbahntermine.de">Eisenbahntermine.de</a>.<br>
+					Wstęp na giełdy modelarskie w Austrii jest zazwyczaj bezpłatny. W Niemczech obowiązuje opłata (zwykle 3-5Euro od osoby dorosłej). Sprzedaż wymaga wcześniejszej rezerwacji u organizatora (opłata za stolik od 10Euro).<br><br>
+				</p>
+				<div id="sidebar">
+					
+					{{ include('MarketSymfonyBundle:Markets:inquiries.html.twig') }}
+
+				</div>
+				<ul class="list">
+				{% for markets in market %}
+					<li>
+						<div>
+							<h5 style="text-align: center;">{{ markets.contact }}</h5>
+							<p style="text-align: center;">
+								<i>Adres giełdy:</i><br>
+								<b>{{ markets.address }}</b>
+							</p>
+						</div>
+						<h4>{{ markets.name }}</h4>
+						<h4 style="font-family: Arial;">Najbliższy termin:</h4>
+						<b><u><p style="font-size: 22px;color:#A00; margin-top: 8px;margin-bottom: -8px;">{{ markets.nextDate }}</p></u></b>
+						{% if markets.schedule %}
+								<h5 style="font-family: Arial;margin-bottom: 10px;">{% if markets.count>1 %}Pozostałe terminy:{% else %}Kolejny termin:{% endif %}</h5>
+							{% for schedule in markets.schedule %}
+								<h6 style="color:#A00;margin-top: -8px;margin-bottom: -8px;">{{ schedule }}</h6><br>
+							{% endfor %}
+						{% endif %}
+					</li>
+					{% endfor %}
+					{% if path=='Polska' %}
+						<li>
+							<div>
+								<img src="/public/images/img6.jpg" alt="Img" height="179" width="197">
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+		
+		{{ include('MarketSymfonyBundle:Markets:footer.html.twig') }}
+
+	</div>
+
+{% endblock %}

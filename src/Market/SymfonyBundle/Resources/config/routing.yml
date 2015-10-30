@@ -2,10 +2,11 @@ market_symfony_homepage:
     path:     /hello/{name}
     defaults: { _controller: MarketSymfonyBundle:Default:index }
 
-markets_index:
-    path:     /{path}
-    defaults: { _controller: MarketSymfonyBundle:Markets:index }
+name_new:
+    path:     /form
+    defaults: { _controller: MarketSymfonyBundle:Default:new }
 
-markets:
-    resource: "@MarketSymfonyBundle/Controller/MarketsController.php"
-    type:     annotation
+showMarketDetails:
+    path:     /terminarz/{seekedMarket}
+    defaults: { _controller: MarketSymfonyBundle:Markets:showMarket }
+
