@@ -1,0 +1,48 @@
+Market\SymfonyBundle\Entity\Markets:
+    type: entity
+    repositoryClass: Market\SymfonyBundle\Entity\MarketsRepository
+    table: markets
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    oneToMany:
+        date:
+            targetEntity: Dates
+            mappedBy: market
+    manyToOne:
+        bookmark:
+             targetEntity: Bookmark
+             inversedBy: markets
+             joinColumn:
+                 name: bookmark_id
+                 referencedColumnName: id
+    fields:
+        marketCity:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: market_city
+        address:
+            type: text
+            nullable: false
+            length: null
+            options:
+                fixed: false
+        contact:
+            type: text
+            nullable: false
+            length: null
+            options:
+                fixed: false
+        hours:
+            type: text
+            nullable: false
+            length: null
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

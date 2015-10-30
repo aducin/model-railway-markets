@@ -1,0 +1,23 @@
+Market\SymfonyBundle\Entity\Dates:
+    type: entity
+    repositoryClass: Market\SymfonyBundle\Entity\DatesRepository
+    table: dates
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        market:
+             targetEntity: Markets
+             inversedBy: date
+             joinColumn:
+                 name: market_id
+                 referencedColumnName: id
+    fields:
+        marketDate:
+            type: date
+            nullable: false
+            column: market_date
+    lifecycleCallbacks: {  }
