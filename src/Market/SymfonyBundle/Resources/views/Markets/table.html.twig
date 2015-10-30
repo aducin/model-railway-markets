@@ -2,12 +2,24 @@
 
 <div id="header">
 	<div class="background">
-		<h1 id="logo"> <a href="{{ app.request.getBaseURL() }}">Add the main text here</a> </h1>
+		<h1 id="logo" style="text-align: center;"> <a href="{{ app.request.getBaseURL() }}/terminarz/homepage">
+		{% if notification %}
+			{{ notification }}
+		{% else %}
+			Terminarz giełd modelarskich
+		{% endif %}
+		</a></h1>
 		<div id="navigation">	
 			<ul>
 				{% for paths in url %}
-					<li {% if path == paths.name %}class="selected"{% endif %}>
-						<a href="{{ paths.path }}">{{ paths.name }}</a>
+					<li {% if path == paths.path %}class="selected"{% endif %}>
+						<a href="{{ paths.path }}">
+						{% if paths.path=='e-market' %}
+						Modele-Ad9bis.pl
+						{% else %}
+						{{ paths.path }}
+						{% endif %}
+						</a>
 					</li>
 				{% endfor %}
 			</ul>
