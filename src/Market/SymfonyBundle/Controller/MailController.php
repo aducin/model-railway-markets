@@ -15,7 +15,7 @@ class MailController extends Controller
 		$subject = 'Wiadomość wysłana przez formularz - Terminy giełd';
 		$message = $message;
 		$headers = 'From: '.$name . "\r\n" .
-    		'Reply-To: .'$name . "\r\n" .
+    		'Reply-To: '.$name . "\r\n" .
     		'X-Mailer: PHP/' . phpversion();
 		if(mail($to, $subject, $message, $headers))
 		{
