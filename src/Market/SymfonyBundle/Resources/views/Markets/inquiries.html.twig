@@ -1,18 +1,40 @@
 {% block inquiries -%}
 
 <div class="section">
-	<h5>for inquiries:</h5>
-	<p>
-		You can remove any link to our website from this website template, you're free to use this website template without linking back to us.
+	<h5>Dodatkowe informacje:</h5>
+	<p style="text-align: justify;">
+		W razie pytań odnośnie ofery sklepu internetowego, prosimy o kontakt mailowy bądź telefoniczny. W przypadku pytań związanych z giełdami modelarskimi, prosimy o kontakt bezpośrednio z organizatorami.
 	</p>
-		<h5>CALL</h5>
+		<h5>Telefon</h5>
 	<p>
-		(222) 987 65 43 2100<br>(687) 123 45 67 8900
+		(48) 660413844
 	</p>
-		<h5>Email</h5>
+		<h5>e-mail</h5>
 	<p>
-		email@company.com
+		ad9bis@gmail.com
 	</p>
+	<p>
+		<img src="/public/images/
+		{% if path=='Polska' %}
+		img0.jpg"
+		{% elseif path=='Austria' %}
+		railjet.jpg"
+		{% else %}
+		img2.jpg"
+		{% endif %}
+		alt="Img" height="290" width="270">
+
+	</p>
+	{% if (path=='Niemcy-Zachód') or (path=='Niemcy-Wschód') %}
+		<p>
+			<img src="/public/images/img1.jpg" alt="Img" height="290" width="270">
+		</p>
+		{% if path=='Niemcy-Wschód' %}
+			<p>
+				<img src="/public/images/sbahn.jpg" alt="Img" height="135" width="128" style="margin-left: 28%;">
+			</p>
+		{% endif %}
+	{% endif %}
 </div>
 
 {% endblock %}
