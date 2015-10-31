@@ -37,6 +37,21 @@ function checkEmail(){
         document.getElementById("labelDiv").style.background = '#690005';
     }
 }
+function checkData(){
+    if(document.send.nameText.value=="" || document.send.emailText.value=="" || document.send.messageText.value=="")
+    {
+        document.getElementById('ifNotData').style.background = 'black';
+        document.getElementById('ifNotData').style.color = 'white';
+        document.getElementById('ifNotData').innerHTML = "Proszę wypełnić wszystkie pola!";
+    }
+}
+function checkDataOnBlur(){
+    if(document.send.nameText.value!="" && document.send.emailText.value!="" && document.send.messageText.value!=""){
+        document.getElementById('ifNotData').style.background = '#690005';
+        document.getElementById('ifNotData').style.color = 'white';
+        document.getElementById('ifNotData').innerHTML = "Wszystkie pola formularza zostały wypełnione.";
+    }
+}
 </script>
     </head>
     <body>
