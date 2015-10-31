@@ -13,7 +13,7 @@ class MailController extends Controller
 	{
 		$to      = 'ad9bis@gmail.com';
 		$subject = $name .'- Wiadomość wysłana przez formularz - Terminy giełd';
-		$message = htmlspecialchars($mess, ENT_COMPAT, 'UTF-8');;
+		$message = htmlspecialchars($message, ENT_COMPAT, 'UTF-8');;
 		$headers = "Reply-to: ".$name."<ad9bis@gmail.pl>".PHP_EOL;
    		$headers .= "From: ".$mail.PHP_EOL;
   		$headers .= "MIME-Version: 1.0".PHP_EOL;

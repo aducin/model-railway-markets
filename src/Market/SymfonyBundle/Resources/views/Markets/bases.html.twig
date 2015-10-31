@@ -28,6 +28,10 @@ function checkEmail(){
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     if(!emailReg.test(document.send.emailText.value))
     {
+        var currentText=document.getElementById('mailDiv').value;
+        document.getElementById("labelDiv").style.background = 'black';
+        document.getElementById("labelDiv").style.color = 'white';
+        document.getElementById('mailDiv').value = currentText+" - niepoprawny format adresu email!";
         alert("Niepoprawny format adresu e-mail!");
     }
 }
