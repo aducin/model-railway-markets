@@ -24,6 +24,13 @@ function setAlert(){
         alert("Nie wpisano pola \"Wiadomość\"!");
     }
 }
+function checkEmail(){
+    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    if(!emailReg.test(document.send.emailText.value))
+    {
+        alert("Niepoprawny format adresu e-mail!");
+    }
+}
 </script>
     </head>
     <body>
