@@ -1,22 +1,22 @@
 {% block form -%}
 
-<form name="send" action="homepage" method="post" id="message" class="section" onsubmit="setAlert()">
+<form name="send" action="{% if firstPage %}terminarz/{% endif %}homepage" method="post" id="message" class="section" onsubmit="setAlert()">
 	<h3 style="font-family: Helvetica">Wyślij wiadomość</h3>
 	<ul>
 		<li>
 			<label>Imię/Nazwisko:</label>
-			<input type="text" name="nameText" value="" onBlur="checkData(),checkDataOnBlur()">
+			<input type="text" name="nameText" value="" onBlur="checkDataOnBlur()">
 		</li>
 		<li>
 			<label><div id="labelDiv">Adres e-mail:</div></label>
-			<input type="text" id='mailDiv' name="emailText" placeholder="Proszę podać adres do korespondencji zwrotnej" onblur="checkEmail(),checkData(), checkDataOnBlur()">
+			<input type="text" id='mailDiv' name="emailText" placeholder="Proszę podać adres do korespondencji zwrotnej" onblur="checkEmail(),checkDataOnBlur()">
 		</li>
 		<li>
 			<label>Wiadomość:</label>
-			<textarea name="messageText" placeholder="Proszę wpisać treść wiadomości" onBlur="checkData(),checkDataOnBlur()"></textarea>
+			<textarea name="messageText" placeholder="Proszę wpisać treść wiadomości" onBlur="checkDataOnBlur()"></textarea>
 		</li>
 		<li>
-			<input type="submit" id='submitDiv' value="Wyślij"><div id='ifNotData' style="margin-left: 105px; text-align: center;"></div>
+			<input type="submit" id='submitDiv' value="Wyślij" disabled="disabled"><div id='ifNotData' style="margin-left: 105px; text-align: center;"></div>
 		</li>
 	</ul>
 </form>
