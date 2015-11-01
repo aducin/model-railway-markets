@@ -36,7 +36,13 @@ class MarketsController extends Controller
 		$finalBookmarkName[]=array('path'=>'e-market');
 
 		if($seekedMarket=='homepage' OR $seekedMarket=='e-market'){
-			return $this->render('MarketSymfonyBundle:Markets:'.$seekedMarket.'.html.twig', array('firstPage'=>$firstPage, 'notification'=> $mailResult, 'path'=>$seekedMarket, 'url'=>$finalBookmarkName));
+			$template=array(
+				'firstPage'=>$firstPage,
+				'notification'=> $mailResult,
+				'path'=>$seekedMarket,
+				'url'=>$finalBookmarkName
+				);
+			return $this->render('MarketSymfonyBundle:Markets:'.$seekedMarket.'.html.twig', $template);
 		}else{
 			$schedule = array();
 			$singleBookmark = $em->getRepository('MarketSymfonyBundle:Bookmark')->findOneByBookmarkName($seekedMarket);
@@ -60,13 +66,25 @@ class MarketsController extends Controller
 					$schedule[]=date_format($date->getMarketDate(), 'Y-m-d');
 					$count++;
 				}
-				$finalIfnormation[]=array('name'=>$market->getMarketCity(), 'address'=>$market->getAddress(), 'contact'=>$market->getContact(), 
-					'hours'=>$market->getHours(), 'nextDate'=>$nextDateFormat, 'schedule'=>$schedule, 'count'=>$count
+				$finalIfnormation[]=array(
+					'name'=>$market->getMarketCity(), 
+					'address'=>$market->getAddress(), 
+					'contact'=>$market->getContact(), 
+					'hours'=>$market->getHours(), 
+					'nextDate'=>$nextDateFormat, 
+					'schedule'=>$schedule, 
+					'count'=>$count
 					);
 				$schedule=null;
 			}
-			return $this->render('MarketSymfonyBundle:Markets:markets.html.twig', array('firstPage'=>$firstPage,'market'=>$finalIfnormation,
-				'notification'=> $mailResult, 'path'=>$singleBookmark, 'url'=>$finalBookmarkName));
+			$template=array(
+				'firstPage'=>$firstPage,
+				'market'=>$finalIfnormation,
+				'notification'=> $mailResult, 
+				'path'=>$singleBookmark,
+				'url'=>$finalBookmarkName
+			);
+			return $this->render('MarketSymfonyBundle:Markets:markets.html.twig', $template);
 		}
 	}
 
@@ -81,7 +99,13 @@ class MarketsController extends Controller
 			$finalBookmarkName[]=array('path'=>$bookmark->getBookmarkName());
 		}
 		$finalBookmarkName[]=array('path'=>'e-market');
-		return $this->render('MarketSymfonyBundle:Markets:homepage.html.twig', array('firstPage'=>'firstPage', 'notification'=> $mailResult,'path'=>'homepage', 'url'=>$finalBookmarkName));
+		$template=array(
+				'firstPage'=>'firstPage',
+				'notification'=> $mailResult, 
+				'path'=>'homepage',
+				'url'=>$finalBookmarkName
+			);
+		return $this->render('MarketSymfonyBundle:Markets:homepage.html.twig', $template);
 	}
 }
 
