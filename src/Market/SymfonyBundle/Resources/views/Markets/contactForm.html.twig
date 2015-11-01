@@ -5,15 +5,15 @@
 	<ul>
 		<li>
 			<label>Imię/Nazwisko:</label>
-			<input type="text" name="nameText" value="" onBlur="checkDataOnBlur()">
+			<input type="text" name="nameText" value="" onkeyup="checkDataOnKeyUp()" onBlur="checkDataOnBlur()">
 		</li>
 		<li>
 			<label><div id="labelDiv">Adres e-mail:</div></label>
-			<input type="text" id='mailDiv' name="emailText" placeholder="Proszę podać adres do korespondencji zwrotnej" onblur="checkEmail(),checkDataOnBlur()">
+			<input type="text" id='mailDiv' name="emailText" placeholder="Proszę podać adres do korespondencji zwrotnej" onkeyup="checkDataOnKeyUp()" onblur="checkEmail(),checkDataOnBlur()">
 		</li>
 		<li>
 			<label>Wiadomość:</label>
-			<textarea name="messageText" placeholder="Proszę wpisać treść wiadomości" onBlur="checkDataOnBlur()"></textarea>
+			<textarea name="messageText" placeholder="Proszę wpisać treść wiadomości" onkeyup="checkDataOnKeyUp()" onBlur="checkDataOnBlur()"></textarea>
 		</li>
 		<li>
 			<input type="submit" id='submitDiv' value="Wyślij" disabled="disabled"><div id='ifNotData' style="margin-left: 105px; text-align: center;"></div>
