@@ -34,18 +34,18 @@ function checkDataOnBlur(){
         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         if(emailReg.test(document.send.emailText.value))
         {
-            document.getElementById('ifNotData').style.background = '#690005';
-            document.getElementById('ifNotData').style.color = 'white';
-            document.getElementById('ifNotData').innerHTML = "Wszystkie pola formularza zostały wypełnione.";
+            document.getElementById('checkedDataInfo').style.background = '#690005';
+            document.getElementById('checkedDataInfo').style.color = 'white';
+            document.getElementById('checkedDataInfo').innerHTML = "Wszystkie pola formularza zostały wypełnione.";
         }else{
-            document.getElementById('ifNotData').style.background = 'black';
-            document.getElementById('ifNotData').style.color = 'white';
-            document.getElementById('ifNotData').innerHTML = "Proszę poprawić adres e-mail!";
+            document.getElementById('checkedDataInfo').style.background = 'black';
+            document.getElementById('checkedDataInfo').style.color = 'white';
+            document.getElementById('checkedDataInfo').innerHTML = "Proszę poprawić adres e-mail!";
         }
     }else{
-        document.getElementById('ifNotData').style.background = 'grey';
-        document.getElementById('ifNotData').style.color = 'white';
-        document.getElementById('ifNotData').innerHTML = "Proszę wypełnić wszystkie pola!";
+        document.getElementById('checkedDataInfo').style.background = 'grey';
+        document.getElementById('checkedDataInfo').style.color = 'white';
+        document.getElementById('checkedDataInfo').innerHTML = "Proszę wypełnić wszystkie pola!";
     }
 }
 

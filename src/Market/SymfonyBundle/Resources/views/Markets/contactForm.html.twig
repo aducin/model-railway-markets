@@ -5,18 +5,18 @@
 	<ul>
 		<li>
 			<label>Imię/Nazwisko:</label>
-			<input type="text" name="nameText" value="" onkeyup="checkDataOnKeyUp()" onBlur="checkDataOnBlur()">
+			<input type="text" name="nameText" value="" onkeyup="checkDataOnKeyUp(), checkDataOnBlur()", onblur="checkDataOnBlur()">
 		</li>
 		<li>
 			<label><div id="labelDiv">Adres e-mail:</div></label>
-			<input type="text" id='mailDiv' name="emailText" placeholder="Proszę podać adres do korespondencji zwrotnej" onkeyup="checkDataOnKeyUp()" onblur="checkEmail(),checkDataOnBlur()">
+			<input type="text" id='mailDiv' name="emailText" placeholder="Proszę podać adres do korespondencji zwrotnej" onkeyup="checkDataOnKeyUp(), checkDataOnBlur()" onblur="checkEmail(), checkDataOnBlur()">
 		</li>
 		<li>
 			<label>Wiadomość:</label>
-			<textarea name="messageText" placeholder="Proszę wpisać treść wiadomości" onkeyup="checkDataOnKeyUp()" onBlur="checkDataOnBlur()"></textarea>
+			<textarea name="messageText" placeholder="Proszę wpisać treść wiadomości" onkeyup="checkDataOnKeyUp(), checkDataOnBlur()"></textarea>
 		</li>
 		<li>
-			<input type="submit" id='submitDiv' value="Wyślij" disabled="disabled"><div id='ifNotData' style="margin-left: 105px; text-align: center;"></div>
+			<input type="submit" id='submitDiv' value="Wyślij" disabled="disabled"><div id='checkedDataInfo' style="margin-left: 105px; text-align: center;"></div>
 		</li>
 	</ul>
 </form>
