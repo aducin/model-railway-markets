@@ -19,8 +19,8 @@ class MarketsController extends Controller
 	{
 		$firstPage=null;
 		$mailResult=null;
-		if(isset($_POST['nameText']) AND (isset($_POST['emailText']) AND (isset($_POST['messageText']))))
-			if($_POST['nameText']!=null AND $_POST['emailText']!=null){
+		if(isset($_POST['nameText']) AND (isset($_POST['emailText']) AND (isset($_POST['messageText'])))){
+			if($_POST['nameText']!=null AND $_POST['emailText']!=null)
 			{
 				$notification = new MailController();
 				$mailResult=$notification->mailSend($_POST['emailText'], $_POST['messageText'], $_POST['nameText']);
@@ -28,12 +28,12 @@ class MarketsController extends Controller
 		}
 		$em = $this->getDoctrine()->getManager();
 		$bookmarks = $em->getRepository('MarketSymfonyBundle:Bookmark')->findAll();
-			$finalBookmarkName[]=array('path'=>'homepage');
-			foreach($bookmarks as $bookmark)
-			{
-				$finalBookmarkName[]=array('path'=>$bookmark->getBookmarkName());
-			}
-			$finalBookmarkName[]=array('path'=>'e-market');
+		$finalBookmarkName[]=array('path'=>'homepage');
+		foreach($bookmarks as $bookmark)
+		{
+			$finalBookmarkName[]=array('path'=>$bookmark->getBookmarkName());
+		}
+		$finalBookmarkName[]=array('path'=>'e-market');
 
 		if($seekedMarket=='homepage' OR $seekedMarket=='e-market'){
 			return $this->render('MarketSymfonyBundle:Markets:'.$seekedMarket.'.html.twig', array('firstPage'=>$firstPage, 'notification'=> $mailResult, 'path'=>$seekedMarket, 'url'=>$finalBookmarkName));
@@ -75,13 +75,13 @@ class MarketsController extends Controller
 		$mailResult=null;
 		$em = $this->getDoctrine()->getManager();
 		$bookmarks = $em->getRepository('MarketSymfonyBundle:Bookmark')->findAll();
-			$finalBookmarkName[]=array('path'=>'homepage');
-			foreach($bookmarks as $bookmark)
-			{
-				$finalBookmarkName[]=array('path'=>$bookmark->getBookmarkName());
-			}
-			$finalBookmarkName[]=array('path'=>'e-market');
-			return $this->render('MarketSymfonyBundle:Markets:homepage.html.twig', array('firstPage'=>'firstPage', 'notification'=> $mailResult,'path'=>'homepage', 'url'=>$finalBookmarkName));
+		$finalBookmarkName[]=array('path'=>'homepage');
+		foreach($bookmarks as $bookmark)
+		{
+			$finalBookmarkName[]=array('path'=>$bookmark->getBookmarkName());
+		}
+		$finalBookmarkName[]=array('path'=>'e-market');
+		return $this->render('MarketSymfonyBundle:Markets:homepage.html.twig', array('firstPage'=>'firstPage', 'notification'=> $mailResult,'path'=>'homepage', 'url'=>$finalBookmarkName));
 	}
 }
 
