@@ -10,6 +10,10 @@ showMarketDetails:
     path:     /terminarz/{seekedMarket}
     defaults: { _controller: MarketSymfonyBundle:Markets:showMarket }
 
+showHomepage:
+    path:     /
+    defaults: { _controller: MarketSymfonyBundle:Markets:showHomepage }
+
 addMarket:
     path:     /add/market
     defaults: { _controller: MarketSymfonyBundle:DataBase:add }

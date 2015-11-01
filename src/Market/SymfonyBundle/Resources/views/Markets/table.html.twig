@@ -13,7 +13,10 @@
 			<ul>
 				{% for paths in url %}
 					<li {% if path == paths.path %}class="selected"{% endif %}>
-						<a href="{{ paths.path }}">
+						<a href="{% if firstPage %}
+						terminarz/
+						{% endif %}
+						{{ paths.path }}">
 						{% if paths.path=='e-market' %}
 						Modele-Ad9bis.pl
 						{% else %}
