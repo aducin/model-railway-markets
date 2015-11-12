@@ -20,13 +20,6 @@ class MarketsController extends Controller
 	{
 		$firstPage=null;
 		$mailResult=null;
-		if(isset($_POST['nameText']) AND (isset($_POST['emailText']) AND (isset($_POST['messageText'])))){
-			if($_POST['nameText']!=null AND $_POST['emailText']!=null)
-			{
-				$notification = new MailController();
-				$mailResult=$notification->mailSend($_POST['emailText'], $_POST['messageText'], $_POST['nameText']);
-			}
-		}
 		$em = $this->getDoctrine()->getManager();
 		$bookmarks = $em->getRepository('MarketSymfonyBundle:Bookmark')->findAll();
 		$finalBookmarkName[]=array('path'=>'homepage');
@@ -140,6 +133,14 @@ class MarketsController extends Controller
             ->getForm();
  
         $form->handleRequest($request);
+
+        if ($form->isValid()) {
+       		$name=$form->getData()->getNameText();
+       		$mail=$form->getData()->getEmail();
+       		$message=$form->getData()->getMessage();
+			$mailResult=$mailPrepare->mailSend($name, $mail, $message);	
+    	}
+
 		return $this->render('MarketSymfonyBundle:Markets:homepage.html.twig', 
 		array('template'=>$template, 'form' => $form->createView()));
 	}
