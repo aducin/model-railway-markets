@@ -2,6 +2,7 @@
 
 namespace Market\SymfonyBundle\Controller;
 
+Use Market\SymfonyBundle\Entity\Addresses;
 use Symfony\Component\Validator\Constraints\Date;
 use Market\SymfonyBundle\Entity\Bookmark;
 use Market\SymfonyBundle\Entity\Dates;
@@ -9,13 +10,13 @@ use Market\SymfonyBundle\Entity\DatesRepository;
 use Market\SymfonyBundle\Entity\Markets;
 use Market\SymfonyBundle\Entity\MarketsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\DateTime;
 
-
 class MarketsController extends Controller
 {
-	public function showMarketAction($seekedMarket)
+	public function showMarketAction($seekedMarket, Request $request)
 	{
 		$firstPage=null;
 		$mailResult=null;
@@ -35,6 +36,26 @@ class MarketsController extends Controller
 		}
 		$finalBookmarkName[]=array('path'=>'e-market');
 
+		$mailPrepare = new Addresses();
+		$form = $this->createFormBuilder($mailPrepare)
+       	    ->add('nameText', 'text', array(
+  		    'attr' => array('class' => 'label')))
+       	    ->add('email', 'text', array(
+            'attr' => array('class' => 'email')))
+       	    ->add('message', 'textarea', array(
+            'attr' => array('class' => 'message')))
+         	->add('save', 'submit', array('label' => 'Wyślij', 'disabled' => true, 'attr'  => array('class' => 'submitButton')))
+            ->getForm();
+ 
+       	$form->handleRequest($request);
+
+       	if ($form->isValid()) {
+       		$name=$form->getData()->getNameText();
+       		$mail=$form->getData()->getEmail();
+       		$message=$form->getData()->getMessage();
+			$mailResult=$mailPrepare->mailSend($name, $mail, $message);	
+    	}
+
 		if($seekedMarket=='homepage' OR $seekedMarket=='e-market'){
 			$template=array(
 				'firstPage'=>$firstPage,
@@ -42,7 +63,9 @@ class MarketsController extends Controller
 				'path'=>$seekedMarket,
 				'url'=>$finalBookmarkName
 				);
-			return $this->render('MarketSymfonyBundle:Markets:'.$seekedMarket.'.html.twig', $template);
+
+			return $this->render('MarketSymfonyBundle:Markets:'.$seekedMarket.'.html.twig', 
+			array('template'=>$template, 'form' => $form->createView()));
 		}else{
 			$schedule = array();
 			$singleBookmark = $em->getRepository('MarketSymfonyBundle:Bookmark')->findOneByBookmarkName($seekedMarket);
@@ -84,11 +107,13 @@ class MarketsController extends Controller
 				'path'=>$singleBookmark,
 				'url'=>$finalBookmarkName
 			);
-			return $this->render('MarketSymfonyBundle:Markets:markets.html.twig', $template);
+
+			return $this->render('MarketSymfonyBundle:Markets:markets.html.twig', 
+			array('template'=>$template, 'form' => $form->createView()));
 		}
 	}
 
-	public function showHomepageAction()
+	public function showHomepageAction(Request $request)
 	{
 		$mailResult=null;
 		$em = $this->getDoctrine()->getManager();
@@ -100,18 +125,23 @@ class MarketsController extends Controller
 		}
 		$finalBookmarkName[]=array('path'=>'e-market');
 		$template=array(
-				'firstPage'=>'firstPage',
-				'notification'=> $mailResult, 
-				'path'=>'homepage',
-				'url'=>$finalBookmarkName
-			);
-		return $this->render('MarketSymfonyBundle:Markets:homepage.html.twig', $template);
+			'firstPage'=>'firstPage',
+			'notification'=> $mailResult, 
+			'path'=>'homepage',
+			'url'=>$finalBookmarkName
+		);
+
+		$mailPrepare = new Addresses();
+		$form = $this->createFormBuilder($mailPrepare)
+            ->add('nameText', 'text')
+            ->add('email', 'text')
+            ->add('message', 'text')
+            ->add('save', 'submit', array('label' => 'Wyślij', 'disabled' => true))
+            ->getForm();
+ 
+        $form->handleRequest($request);
+		return $this->render('MarketSymfonyBundle:Markets:homepage.html.twig', 
+		array('template'=>$template, 'form' => $form->createView()));
 	}
 }
 
-/*database_host:     127.0.0.1
-    database_port:     ~
-    database_name:     symfony
-    database_user:     root
-    database_password: ~
-    */

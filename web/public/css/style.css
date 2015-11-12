@@ -12,6 +12,45 @@ body {
 	min-width: 960px;
 	margin: 0;
 }
+.email{
+	width:352px; 
+	height: 20px;
+	border-radius: 6px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:14px;
+}
+.label{
+	width:352px; 
+	height: 20px;
+	border-radius: 6px;
+	text-align: center;
+	font-size:14px;
+}
+.message{
+	width:352px; 
+	height: 57px;
+	border-radius: 6px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:14px;
+}
+.required{
+	float: left;
+	color: #b3999c;
+	display: inline-block;
+	font-size: 14px;
+	line-height: 30px;
+	width: 86px;
+	margin-right: 10px;
+	text-align: right;
+}
+.submitButton{
+	position: absolute;
+	left:22.4%;
+	padding: 5px;
+	border-radius: 4px;
+}
 .background {
 	background: url(../images/bg-pattern-red.jpg) repeat left top;
 }

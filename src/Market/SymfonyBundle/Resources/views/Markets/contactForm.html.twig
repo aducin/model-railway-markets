@@ -1,24 +1,27 @@
 {% block form -%}
-
-<form name="send" action="{% if firstPage %}terminarz/{% endif %}homepage" method="post" id="message" class="section" onsubmit="setAlert()">
-	<h3 style="font-family: Helvetica">Wyślij wiadomość</h3>
-	<ul>
-		<li>
-			<label>Imię/Nazwisko:</label>
-			<input type="text" name="nameText" value="" onkeyup="checkDataOnKeyUp(), checkDataOnBlur()", onblur="checkDataOnBlur()">
-		</li>
-		<li>
-			<label><div id="labelDiv">Adres e-mail:</div></label>
-			<input type="text" id='mailDiv' name="emailText" placeholder="Proszę podać adres do korespondencji zwrotnej" onkeyup="checkDataOnKeyUp(), checkDataOnBlur()" onblur="checkEmail(), checkDataOnBlur()">
-		</li>
-		<li>
-			<label>Wiadomość:</label>
-			<textarea name="messageText" placeholder="Proszę wpisać treść wiadomości" onkeyup="checkDataOnKeyUp(), checkDataOnBlur()"></textarea>
-		</li>
-		<li>
-			<input type="submit" id='submitDiv' value="Wyślij" disabled="disabled"><div id='checkedDataInfo' style="margin-left: 105px; text-align: center;"></div>
-		</li>
-	</ul>
-</form>
-
+	{{ form_start(form, { 'attr': {'class': 'section'}}) }}
+		<h3 style="font-family: Helvetica">Wyślij wiadomość</h3>
+		<ul>
+			<li>
+				{{ form_label(form.nameText, 'Imię/Nazwisko:') }}
+				{{ form_widget(form.nameText, { 'attr': {'onkeyup': 'checkDataOnBlur()', 'onChange': 'checkDataOnBlur()','onblur': 'checkDataOnKeyUp()', 'onkeypress': 'checkDataOnKeyUp()'}
+				}) }}
+			</li>
+			<li>
+				{{ form_label(form.email, 'Adres e-mail:', { 'label_attr': {'class': 'info'} }) }}
+				{{ form_widget(form.email, { 'attr': {'placeholder': 'Proszę podać adres do korespondencji zwrotnej', 'onkeyup': 'checkDataOnKeyUp()','onblur': 'checkEmail()', 
+				'onChange': 'checkDataOnBlur()', 'onkeypress': 'checkDataOnBlur()'}
+				}) }}
+			</li>
+			<li>
+				{{ form_label(form.message, 'Wiadomość:') }}
+				{{ form_widget(form.message, { 'attr': {'placeholder': 'Proszę wpisać treść wiadomości','onkeyup': 'checkDataOnBlur()', 'onChange': 'checkDataOnBlur()',
+				'onblur': 'checkDataOnKeyUp()', 'onkeypress': 'checkDataOnKeyUp()'}
+				}) }}
+			</li>
+			<li>
+				<div id='checkedDataInfo' style="width: 358px; margin-left: 96px; text-align: center; border-radius: 4px;"></div>
+			</li>
+		</ul>
+	{{ form_end(form) }}
 {% endblock -%}

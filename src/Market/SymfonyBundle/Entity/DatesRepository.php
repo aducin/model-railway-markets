@@ -13,32 +13,32 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class DatesRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function findAllDatesCurrentDate($product, $resultName)
-     {
-		$result=$this->getEntityManager()
-             ->createQuery(
-			'SELECT d FROM MarketSymfonyBundle:Dates d WHERE d.market = :market AND d.marketDate > :time  ORDER BY d.marketDate ASC'
-			)->setParameters(array(
-				'market' => $product->getId(),
-				'time' => date("Y/m/d"),
-			))->setFirstResult($resultName)
-             ->getResult();
-        return $result;
-     }
+    public function findAllDatesCurrentDate($product, $resultName)
+    {
+    $result=$this->getEntityManager()
+      ->createQuery(
+       'SELECT d FROM MarketSymfonyBundle:Dates d WHERE d.market = :market AND d.marketDate > :time  ORDER BY d.marketDate ASC'
+       )->setParameters(array(
+        'market' => $product->getId(),
+        'time' => date("Y/m/d"),
+        ))->setFirstResult($resultName)
+       ->getResult();
+       return $result;
+    }
 
-     public function findFirstMarketDate($product)
-     {
-		$result=$this->getEntityManager()
-             ->createQuery(
-			'SELECT d FROM MarketSymfonyBundle:Dates d WHERE d.market = :market AND d.marketDate > :time  ORDER BY d.marketDate ASC'
-			)->setParameters(array(
-				'market' => $product->getId(),
-				'time' => date("Y/m/d"),
-			))->setMaxResults(1)
-             ->getResult();
-            if(!isset($result[0])){
-            	$result='noResult';
-       		}
+    public function findFirstMarketDate($product)
+    {
+        $result=$this->getEntityManager()
+        ->createQuery(
+            'SELECT d FROM MarketSymfonyBundle:Dates d WHERE d.market = :market AND d.marketDate > :time  ORDER BY d.marketDate ASC'
+            )->setParameters(array(
+                'market' => $product->getId(),
+                'time' => date("Y/m/d"),
+                ))->setMaxResults(1)
+            ->getResult();
+        if(!isset($result[0])){
+            $result='noResult';
+        }
         return $result;
-     }
+    }
 }

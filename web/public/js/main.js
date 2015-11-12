@@ -14,25 +14,46 @@ function setAlert(){
 }
 
 function checkEmail(){
+    var currentClass=document.getElementsByClassName('info required')[0];
+    var emailText=document.getElementById('form_email').value;
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    if(!emailReg.test(document.send.emailText.value))
+    if(!emailReg.test(emailText))
     {
-        document.getElementById("labelDiv").style.background = 'black';
-        document.getElementById("labelDiv").style.color = 'white';
-        document.getElementById("labelDiv").style.textAlign = "center";
-        document.getElementById("labelDiv").innerHTML = 'Podano błędny format email!';
+        if(currentClass!=null){
+            document.getElementsByClassName('info required')[0].style.background = 'black';
+            document.getElementsByClassName('info required')[0].style.color = 'white';
+            document.getElementsByClassName('info required')[0].style.textAlign = "center";
+            document.getElementsByClassName('info required')[0].innerHTML = 'Popraw adres! ';
+            document.getElementsByClassName('info required')[0].className = "changedClass";
+        }else{
+            document.getElementsByClassName('changedClass')[0].style.background = 'black';
+            document.getElementsByClassName('changedClass')[0].style.color = 'white';
+            document.getElementsByClassName('changedClass')[0].style.textAlign = "center";
+            document.getElementsByClassName('changedClass')[0].innerHTML = 'Popraw adres! ';
+        }
     }else{
-        document.getElementById("labelDiv").style.background = '#690005';
-        document.getElementById("labelDiv").style.fontSize = 'small';
-        document.getElementById("labelDiv").style.textAlign = "center";
-        document.getElementById("labelDiv").innerHTML = 'Adres poprawny';
+        if(currentClass!=null){
+        document.getElementsByClassName('info required')[0].style.background = '#690005';
+        document.getElementsByClassName('info required')[0].style.fontSize = 'small';
+        document.getElementsByClassName('info required')[0].style.textAlign = "center";
+        document.getElementsByClassName('info required')[0].innerHTML = 'Adres poprawny';
+        document.getElementsByClassName('info required')[0].className = "changedClass";
+        }else{
+            document.getElementsByClassName('changedClass')[0].style.background = '#690005';
+            document.getElementsByClassName('changedClass')[0].style.fontSize = 'small';
+            document.getElementsByClassName('changedClass')[0].style.textAlign = "center";
+            document.getElementsByClassName('changedClass')[0].innerHTML = 'Adres poprawny';
+        }
     }
 }
 
 function checkDataOnBlur(){
-    if(document.send.nameText.value!="" && document.send.emailText.value!="" && document.send.messageText.value!=""){
+    var nameText=document.getElementById('form_nameText').value;
+    var emailText=document.getElementById('form_email').value;
+    var messageText=document.getElementById('form_message').value;
+    if(nameText!="" && emailText!="" && messageText!=""){
         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-        if(emailReg.test(document.send.emailText.value))
+        if(emailReg.test(emailText))
         {
             document.getElementById('checkedDataInfo').style.background = '#690005';
             document.getElementById('checkedDataInfo').style.color = 'white';
@@ -50,13 +71,15 @@ function checkDataOnBlur(){
 }
 
 function checkDataOnKeyUp(){
-    if(document.send.nameText.value!="" && document.send.emailText.value!="" && document.send.messageText.value!=""){
+    var nameText=document.getElementById('form_nameText').value;
+    var emailText=document.getElementById('form_email').value;
+    var messageText=document.getElementById('form_message').value;
+    if(nameText!="" && emailText!="" && messageText!=""){
         var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-        if(emailReg.test(document.send.emailText.value))
-        {
-            document.getElementById('submitDiv').disabled = false;  
+        if(emailReg.test(emailText)){
+            document.getElementById('form_save').disabled = false;  
         }else{
-            document.getElementById('submitDiv').disabled = true;  
+            document.getElementById('form_save').disabled = true;  
         }
     }
 }
