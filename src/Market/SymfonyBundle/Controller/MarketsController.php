@@ -31,19 +31,19 @@ class MarketsController extends Controller
 
 		$mailPrepare = new Addresses();
 		$form = $this->createFormBuilder($mailPrepare)
-       	    ->add('nameText', 'text', array(
-  		    'attr' => array('class' => 'label')))
-       	    ->add('email', 'text', array(
-            'attr' => array('class' => 'email')))
-       	    ->add('message', 'textarea', array(
-            'attr' => array('class' => 'message')))
-         	->add('save', 'submit', array('label' => 'Wyślij', 'disabled' => true, 'attr'  => array('class' => 'submitButton')))
-            ->getForm();
- 
-       	$form->handleRequest($request);
+		->add('nameText', 'text', array(
+			'attr' => array('class' => 'label')))
+		->add('email', 'text', array(
+			'attr' => array('class' => 'email')))
+		->add('message', 'textarea', array(
+			'attr' => array('class' => 'message')))
+		->add('save', 'submit', array('label' => 'Wyślij', 'disabled' => true, 'attr'  => array('class' => 'submitButton')))
+		->getForm();
+		
+		$form->handleRequest($request);
 
-       	if ($form->isValid()) {
-       		$name=$form->getData()->getNameText();
+		if ($form->isValid()) {
+			$name=$form->getData()->getNameText();
        		$mail=$form->getData()->getEmail();
        		$message=$form->getData()->getMessage();
 			$mailResult=$mailPrepare->mailSend($name, $mail, $message);	
@@ -126,13 +126,16 @@ class MarketsController extends Controller
 
 		$mailPrepare = new Addresses();
 		$form = $this->createFormBuilder($mailPrepare)
-            ->add('nameText', 'text')
-            ->add('email', 'text')
-            ->add('message', 'text')
-            ->add('save', 'submit', array('label' => 'Wyślij', 'disabled' => true))
-            ->getForm();
- 
-        $form->handleRequest($request);
+		->add('nameText', 'text', array(
+			'attr' => array('class' => 'label')))
+		->add('email', 'text', array(
+			'attr' => array('class' => 'email')))
+		->add('message', 'textarea', array(
+			'attr' => array('class' => 'message')))
+		->add('save', 'submit', array('label' => 'Wyślij', 'disabled' => true, 'attr'  => array('class' => 'submitButton')))
+		->getForm();
+		
+		$form->handleRequest($request);
 
         if ($form->isValid()) {
        		$name=$form->getData()->getNameText();
